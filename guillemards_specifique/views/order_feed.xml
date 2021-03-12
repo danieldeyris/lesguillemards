@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2015-Present Webkul Software Pvt. Ltd. (<https://webkul.com/>) -->
+<!-- See LICENSE file for full copyright and licensing details. -->
+<!-- "License URL :<https://store.webkul.com/license.html/>" -->
+<odoo>
+	<data>
+
+
+		<record id="order_feed_view_form_guillemards" model="ir.ui.view">
+			<field name="name">order.feed.form.guillemards</field>
+			<field name="model">order.feed</field>
+			<field name="inherit_id" ref="odoo_multi_channel_sale.order_feed_view_form"/>
+			<field name="arch" type="xml">
+			  <xpath expr="//field[@name='customer_mobile']" position="after">
+				<field name="branch_id"/>
+			  </xpath>
+			</field>
+		</record>
+
+	</data>
+</odoo>

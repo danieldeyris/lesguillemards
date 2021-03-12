@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This file is part of an Adiczion's Module.
+The COPYRIGHT and LICENSE files at the top level of this repository
+contains the full copyright notices and license terms. -->
+<odoo>
+
+    <record id="view_delivery_carrier_form_with_provider_colissimo" model="ir.ui.view">
+        <field name="name">delivery.carrier.form.provider.colissimo</field>
+        <field name="model">delivery.carrier</field>
+        <field name="inherit_id" ref="delivery.view_delivery_carrier_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='destination']" position='before'>
+                <page string="Colissimo Configuration" attrs="{'invisible': [('delivery_type', '!=', 'colissimo')]}">
+                    <group string="Details" id="details">
+                        <group id="details-col1">
+                            <field name="coli_service"/>
+                            <field name="coli_assurance"/>
+                            <field name="coli_assurance_min_amount"/>
+                        </group>
+                        <group id="details-col2">
+                            <field name="coli_label_format" attrs="{'required': [('delivery_type', '=', 'colissimo')]}"/>
+                            <field name="coli_remove_label" attrs="{'required': [('delivery_type', '=', 'colissimo')]}"/>
+                        </group>
+                    </group>
+                    <group>
+                        <newline/>
+                        <group string="Production" id="prod">
+                            <field name="coli_account_number" placeholder="123456" attrs="{'required': [('prod_environment', '=', True), ('delivery_type', '=', 'colissimo')]}"/>
+                            <field name="coli_passwd" password="True" attrs="{'required': [('prod_environment', '=', True), ('delivery_type', '=', 'colissimo')]}"/>
+                        </group>
+                        <group id="test"></group>
+                        <group string="URL(s)" id="url1" colspan="4" cols="2">
+                            <field name="coli_shipping_url" placeholder="https://server.com/folder/WebService?wsdl" attrs="{'required': [('delivery_type', '=', 'colissimo')]}"/>
+                            <!--<field name="coli_tracking_url" placeholder="https://server.com/folder/WebService?wsdl" attrs="{'required': [('delivery_type', '=', 'colissimo')]}"/>-->
+                            <field name="coli_relaypoint_url" placeholder="https://server.com/folder/WebService?wsdl" attrs="{'required': [('delivery_type', '=', 'colissimo')]}"/>
+                        </group>
+                    </group>
+                </page>
+                <page name="pricing" string="Pricing" attrs="{'invisible': [('delivery_type', '!=', 'colissimo')]}">
+                    <group name="general">
+                        <field name="price_rule_ids" nolabel="1"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

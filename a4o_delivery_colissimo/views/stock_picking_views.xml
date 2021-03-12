@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file is part of an Adiczion's Module.
+The COPYRIGHT and LICENSE files at the top level of this repository
+contains the full copyright notices and license terms. -->
+<odoo>
+    <record id="view_quant_package_weight_form" model="ir.ui.view">
+        <field name="name">stock.quant.package.weight.form</field>
+        <field name="model">stock.quant.package</field>
+        <field name="inherit_id" ref="delivery.view_quant_package_weight_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='packaging_id']" position="before">
+                <field name="mandatory_weight" invisible="1"/>
+            </xpath>
+            <xpath expr="//field[@name='shipping_weight']" position="attributes">
+                <attribute name="attrs">{'required': [('mandatory_weight','=', True)]}</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_picking_withcarrier_out_form_colissimo" model="ir.ui.view">
+        <field name="name">delivery.stock.picking_withcarrier.form.view.colissimo</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="delivery.view_picking_withcarrier_out_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='carrier_data']/field[@name='carrier_id']" position="replace">
+                <field name="carrier_id"
+                    attrs="{'readonly': [('state', 'in', ('done')), ('carrier_tracking_ref','!=',False), ('delivery_type','!=',False), '|', ('state', 'in', ('cancel'))]}"
+                    options="{'no_create': True, 'no_open': True}"/>
+            </xpath>
+            <xpath expr="//group[@name='carrier_data']/field[@name='carrier_id']" position="after">
+                <field name="is_relay_point" attrs="{'invisible': True}"/>
+                <div class="text-muted"
+                    attrs="{'invisible': ['|', ('is_relay_point', '!=', True), ('state', 'in', ('done', 'cancel'))]}">
+                    open the wizard for selecting a relay point address.
+                </div>
+                <button type='object' class="fa fa-arrow-right oe_link"
+                    name="action_get_relaypoint" string="Selection of a relay point"
+                    attrs="{'invisible': ['|', ('is_relay_point', '!=', True), ('state', 'in', ('done', 'cancel'))]}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_picking_internal_search_colissimo" model="ir.ui.view">
+        <field name="name">stock.picking.internal.search.colissimo</field>
+        <field name="model">stock.picking</field>
+        <!--<field name="inherit_id" ref="stock.view_picking_internal_search"/>-->
+        <field name="inherit_id" ref="a4o_delivery_slip.view_picking_internal_search_delivery_slip"/>
+        <field name="arch" type="xml">
+            <xpath expr="/search/filter[@name='missing_delivery_slip']" position="after">
+                <separator/>
+                <filter name="colissimo" string="Colissimo"
+                    domain="[('delivery_type', '=', 'colissimo')]"
+                    help="Collection carried out and sent with Colissimo carrier"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

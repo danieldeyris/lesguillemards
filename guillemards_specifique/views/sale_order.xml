@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Sale order Inherit Form View to Modify it -->
+        <record id="view_order_form_inherit_branch_guillemards" model="ir.ui.view">
+            <field name="name">view.order.form.inherit.branch.guillemards</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="branch.view_order_form_inherit_branch"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_shipping_id']" position="after">
+                    <field name="branch_id"/>
+                </xpath>
+                <xpath expr="//group[@name='branch']" position="replace"/>
+            </field>
+        </record>
+
+    </data>
+</odoo>

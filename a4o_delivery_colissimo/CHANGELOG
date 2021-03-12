@@ -1,0 +1,13 @@
+Version 12.0.3 - 2020-08-15
+  * Addition of slip management
+  * Corrects/adds management of tracking links when there are several packages
+  * Some other small fixes
+Version 12.0.2 - 2020-07-29
+  * Name and first name management
+  * Shipping weight management
+Version 12.0.1 - 2020-07-26
+  * Code formatting, cleanup, small fixes
+  * Update French translation
+  * Update the doc
+Version 12.0.0 - 2020-05-17
+  * Initial release

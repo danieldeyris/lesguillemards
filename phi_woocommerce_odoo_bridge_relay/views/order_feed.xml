@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--#################################################################################-->
+<!--#-->
+<!--#   Copyright (c) 2020-Present Phidias (https://www.phidias.fr)-->
+<!--#    See LICENSE file for full copyright and licensing details.-->
+<!--#################################################################################-->
+<odoo>
+    <data>
+
+        <record id="order_feed_view_form_relay" model="ir.ui.view">
+            <field name="name">order.feed.form.relay</field>
+            <field name="model">order.feed</field>
+            <field name="inherit_id" ref="odoo_multi_channel_sale.order_feed_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='shipping_street2']" position="after">
+                    <field name="shipping_code_relaypoint"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

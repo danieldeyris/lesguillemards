@@ -43,13 +43,13 @@
 
         <xpath expr="//ul[hasclass('list-inline')]" position="replace">
             <t t-if="branch">
-                <li t-if="branch.telephone" class="list-inline-item d-inline">Phone: <span class="o_force_ltr" t-field="branch.telephone"/></li>
+                <li t-if="branch.telephone" class="list-inline-item d-inline">Téléphone: <span class="o_force_ltr" t-field="branch.telephone"/></li>
                 <li t-if="branch.email" class="list-inline-item d-inline">Email: <span t-field="branch.email"/></li>
                 <li t-if="branch.website" class="list-inline-item d-inline">Web: <span t-field="branch.website"/></li>
                 <li t-if="company.vat" class="list-inline-item d-inline"><t t-esc="company.country_id.vat_label or 'Tax ID'"/>: <span t-field="company.vat"/></li>
             </t>
             <t t-else="else">
-                <li t-if="company.phone" class="list-inline-item d-inline">Phone: <span class="o_force_ltr" t-field="company.phone"/></li>
+                <li t-if="company.phone" class="list-inline-item d-inline">Téléphone: <span class="o_force_ltr" t-field="company.phone"/></li>
                 <li t-if="company.email" class="list-inline-item d-inline">Email: <span t-field="company.email"/></li>
                 <li t-if="company.website" class="list-inline-item d-inline">Web: <span t-field="company.website"/></li>
                 <li t-if="company.vat" class="list-inline-item d-inline"><t t-esc="company.country_id.vat_label or 'Tax ID'"/>: <span t-field="company.vat"/></li>

@@ -10,3 +10,5 @@ class ResBranch(models.Model):
     email = fields.Char('Email')
     website = fields.Char(string="Site WEB", help='eg. http://xyz.com')
     partner_id = fields.Many2one('res.partner', string='Adresse')
+    telephone = fields.Char(string='Téléphone')
+    street = fields.Char(related="partner_id.street")

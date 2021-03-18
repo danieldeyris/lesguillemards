@@ -13,7 +13,7 @@
     'author': "Phidias",
     'website': "http://www.phidias.fr",
     'category': 'Uncategorized',
-    'version': '13.0.0.5',
+    'version': '13.0.0.7',
 
     # any module necessary for this one to work correctly
     'depends': [
@@ -21,6 +21,7 @@
         'web',
         'odoo_multi_channel_sale',
         'woocommerce_odoo_connector',
+        'pos_branch',
     ],
     "data": [
         'views/partner.xml',
@@ -29,5 +30,6 @@
         'views/sale_order.xml',
         'views/multi_channel_sale.xml',
         'views/order_feed.xml',
+        'views/pos_view.xml',
     ],
 }

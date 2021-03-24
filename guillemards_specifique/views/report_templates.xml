@@ -58,4 +58,22 @@
 
     </template>
 
+    <template id="report_invoice_document_guillemards" inherit_id="account.report_invoice_document">
+      <xpath expr="/t[1]/t[1]/t[2]/div[1]" position="attributes">
+        <attribute name="t-options-fields">['address', 'name', 'phone', 'mobile', 'email']</attribute>
+      </xpath>
+    </template>
+
+    <template id="report_saleorder_document_guillemards" inherit_id="sale.report_saleorder_document">
+      <xpath expr="/t[1]/t[1]/t[2]/div[1]" position="attributes">
+        <attribute name="t-options-fields">['address', 'name', 'phone', 'mobile', 'email']</attribute>
+      </xpath>
+    </template>
+
+     <template id="report_delivery_document_guillemards" inherit_id="stock.report_delivery_document">
+      <xpath expr="/t[1]/t[1]/t[1]/t[3]/t[1]/div[1]" position="attributes">
+        <attribute name="t-options-fields">['address', 'name', 'phone', 'mobile', 'email']</attribute>
+      </xpath>
+    </template>
+
 </odoo>

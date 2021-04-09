@@ -287,7 +287,7 @@ GENERATELABEL = [
                 },
             {
                 'dst': 'letter.parcel.pickupLocationId',
-                'src': "record.partner_id.code_relaypoint or ''",
+                'src': "(record.partner_id.code_relaypoint or '' if record.is_relay_point else '')",
                 },
             {
                 'dst': 'letter.parcel.ftd',

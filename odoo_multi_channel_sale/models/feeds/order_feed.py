@@ -420,12 +420,16 @@ class OrderFeed(models.Model):
 		else:
 			if state == 'done':
 				try:
-					order_state = vals.pop('order_state')
-					erp_id = self.env['sale.order'].create(vals)
-					message += self.env['multi.channel.skeleton']._SetOdooOrderState(erp_id,channel_id,order_state,self.payment_method,date_invoice=date_invoice,confirmation_date=confirmation_date)
-					message  += '<br/> Order %s successfully evaluated'%(self.store_id)
-					create_id =  channel_id.create_order_mapping(erp_id,store_id,store_source)
-
+					if 'partner_id' in vals:
+						order_state = vals.pop('order_state')
+						erp_id = self.env['sale.order'].create(vals)
+						message += self.env['multi.channel.skeleton']._SetOdooOrderState(erp_id,channel_id,order_state,self.payment_method,date_invoice=date_invoice,confirmation_date=confirmation_date)
+						message  += '<br/> Order %s successfully evaluated'%(self.store_id)
+						create_id =  channel_id.create_order_mapping(erp_id,store_id,store_source)
+					else:
+						message += '<br/>%s' % ("client vide")
+						_logger.error('#OrderError6 %r' % message)
+						state = 'error'
 				except Exception as e:
 					message += '<br/>%s' % (e)
 					_logger.error('#OrderError6 %r'%message)

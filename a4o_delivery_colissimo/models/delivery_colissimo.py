@@ -54,11 +54,11 @@ class ProviderColissimo(models.Model):
     delivery_type = fields.Selection(
         selection_add=[('colissimo', "Colissimo")])
     coli_account_number = fields.Char(
-        string='Account Number', groups="base.group_system", size=6,
+        string='Account Number', size=6,
         help="Colissimo contract number (the same is used for the production "
              "and the tests).")
     coli_passwd = fields.Char(
-        string='Password', groups="base.group_system",
+        string='Password',
         help="Password to use for connection")
     coli_label_format = fields.Selection(
         LABEL_FORMAT, string="Label Colissimo Format", required=True,
@@ -67,10 +67,10 @@ class ProviderColissimo(models.Model):
         'Remove the attached colissimo label', default=False,
         help="When canceling a shipment, remove the attached labels.")
     coli_shipping_url = fields.Char(
-        string='Shipping URL (colissimo)', groups="base.group_system",
+        string='Shipping URL (colissimo)',
         help="WSDL url for shipping.")
     coli_relaypoint_url = fields.Char(
-        string='Relay Point URL', groups="base.group_system",
+        string='Relay Point URL',
         help="WSDL url for searching relay point.")
     coli_max_point = fields.Integer(
         string="Relay Points Max", default=5,

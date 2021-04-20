@@ -171,7 +171,7 @@ class ImportWoocommerceOrders(models.TransientModel):
             order_dict['same_shipping_billing'] = False
             order_dict.update({
                 'shipping_partner_id': order['billing']['email'],
-                'shipping_name': order['shipping']['first_name']+" "+order['billing']['last_name'],
+                'shipping_name': order['shipping']['first_name']+" "+order['shipping']['last_name'],
                 'shipping_street': order['shipping']['address_1'],
                 'shipping_street2': order['shipping']['address_2'],
                 'shipping_email': order['billing']['email'],

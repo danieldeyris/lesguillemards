@@ -23,9 +23,9 @@ class Partner(models.Model):
             # if link to company get company name.
             names['company'] =self.parent_id.name
 
-        if self.parent_id and not self.parent_id.is_company:
-            # if link to company get company name.
-            names['lastname'] =self.parent_id.name
+        # if self.parent_id and not self.parent_id.is_company:
+        #     # if link to company get company name.
+        #     names['lastname'] =self.parent_id.name
 
         return names
 

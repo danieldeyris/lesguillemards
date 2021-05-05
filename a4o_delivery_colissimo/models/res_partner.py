@@ -30,13 +30,19 @@ class Partner(models.Model):
         return names
 
     def get_phone(self):
-        phone = self.mobile or self.phone
+        if self.self.parent_id:
+            phone = self.phone or self.self.parent_id.phone
+        else:
+            phone = self.phone
         if phone:
           phone = phone.replace(' ','')
         return phone
 
     def get_mobile_phone(self):
-        phone = self.mobile
+        if self.self.parent_id:
+            phone = self.mobile or self.self.parent_id.mobile
+        else:
+            phone = self.mobile
         if phone:
           phone = phone.replace(' ','')
         return phone

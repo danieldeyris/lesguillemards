@@ -403,9 +403,9 @@ GENERATELABEL = [
                 },
             {
                 'dst': 'letter.addressee.address.mobileNumber',
-                'src': ('record.partner_id.parent_id.get_phone() '
+                'src': ('record.partner_id.parent_id.get_mobile_phone() '
                         'if record.is_relay_point '
-                        'else record.partner_id.get_phone()'),
+                        'else record.partner_id.get_mobile_phone()'),
                 },
             {
                 'dst': 'letter.addressee.address.phoneNumber',

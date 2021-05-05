@@ -35,3 +35,8 @@ class Partner(models.Model):
           phone = phone.replace(' ','')
         return phone
 
+    def get_mobile_phone(self):
+        phone = self.mobile
+        if phone:
+          phone = phone.replace(' ','')
+        return phone

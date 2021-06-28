@@ -87,3 +87,11 @@ class StockPicking(models.Model):
             return int(self.carrier_id.coli_assurance) * 100
         else:
             return False
+
+    def get_postal_code(self):
+        # if self.partner_id.country_id.code == 'PT':
+        #     zip = self.partner_id.zip.split('-')
+        #     return zip[0]
+        # else:
+        #     return self.partner_id.zip
+        return self.partner_id.zip.replace('-','')

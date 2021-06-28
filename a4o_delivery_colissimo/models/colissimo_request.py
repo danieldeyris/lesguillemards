@@ -265,6 +265,10 @@ GENERATELABEL = [
                 'required': True,
                 },
             {
+                'dst': 'letter.service.orderNumber',
+                'src': "record.origin",
+                },
+            {
                 'dst': 'letter.service.commercialName',
                 'src': ('record.company_id.partner_id.name '
                         'if record.is_relay_point '
@@ -287,7 +291,7 @@ GENERATELABEL = [
                 },
             {
                 'dst': 'letter.parcel.pickupLocationId',
-                'src': "(record.partner_id.code_relaypoint or '' if record.is_relay_point else '')",
+                'src': "record.partner_id.code_relaypoint or ''",
                 },
             {
                 'dst': 'letter.parcel.ftd',
@@ -300,6 +304,11 @@ GENERATELABEL = [
                 'required': True,
                 },
             {
+                'dst': 'letter.sender.senderParcelRef',
+                'src': "record.origin",
+                'required': True,
+            },
+            {
                 'dst': 'letter.sender.address.companyName',
                 'src': 'record.company_id.partner_id.name',
                 'max_size': 35,
@@ -307,32 +316,31 @@ GENERATELABEL = [
                 },
             {
                 'dst': 'letter.sender.address.line2',
-                'src': 'record.company_id.partner_id.street',
+                'src': 'record.picking_type_id.warehouse_id.partner_id.street',
                 'max_size': 35,
                 'required': True,
                 },
             {
                 'dst': 'letter.sender.address.line3',
-                'src': 'record.company_id.partner_id.street2',
+                'src': 'record.picking_type_id.warehouse_id.partner_id.street2',
                 'max_size': 35,
                 },
             {
                 'dst': 'letter.sender.address.countryCode',
-                'src': 'record.company_id.partner_id.country_id.code',
+                'src': 'record.picking_type_id.warehouse_id.partner_id.country_id.code',
                 'default': 'FR',
                 'max_size': 2,
                 'required': True,
                 },
             {
                 'dst': 'letter.sender.address.city',
-                'src': 'record.company_id.partner_id.city',
+                'src': 'record.picking_type_id.warehouse_id.partner_id.city',
                 'max_size': 35,
                 'required': True,
                 },
             {
                 'dst': 'letter.sender.address.zipCode',
-                'src': 'record.company_id.partner_id.zip',
-                'max_size': 5,
+                'src': 'record.picking_type_id.warehouse_id.partner_id.zip',
                 'required': True,
                 },
             {
@@ -344,24 +352,22 @@ GENERATELABEL = [
                 'src': 'record.company_id.partner_id.mobile',
                 },
             {
+                'dst': 'letter.addressee.addresseeParcelRef',
+                'src': "record.origin",
+                },
+            {
                 'dst': 'letter.addressee.address.companyName',
-                'src': ('record.partner_id.parent_id.get_names()'
-                        '.get("company") if record.is_relay_point '
-                        'else record.partner_id.get_names().get("company")'),
+                'src': 'record.partner_id.get_names(is_relay_point=record.is_relay_point).get("company")',
                 },
             {
                 'dst': 'letter.addressee.address.lastName',
-                'src': ('record.partner_id.parent_id.get_names()'
-                        '.get("lastname") if record.is_relay_point '
-                        'else record.partner_id.get_names().get("lastname")'),
+                'src': 'record.partner_id.get_names(is_relay_point=record.is_relay_point).get("lastname")',
                 'max_size': 35,
                 'required': True,
                 },
             {
                 'dst': 'letter.addressee.address.firstName',
-                'src': ('record.partner_id.parent_id.get_names()'
-                        '.get("firstname") if record.is_relay_point '
-                        'else record.partner_id.get_names().get("firstname")'),
+                'src': 'record.partner_id.get_names(is_relay_point=record.is_relay_point).get("firstname")',
                 'max_size': 35,
                 'required': True,
                 },
@@ -391,8 +397,7 @@ GENERATELABEL = [
                 },
             {
                 'dst': 'letter.addressee.address.zipCode',
-                'src': 'record.partner_id.zip',
-                'max_size': 5,
+                'src': 'record.get_postal_code()',
                 'required': True,
                 },
             {
@@ -403,15 +408,13 @@ GENERATELABEL = [
                 },
             {
                 'dst': 'letter.addressee.address.mobileNumber',
-                'src': ('record.partner_id.parent_id.get_mobile_phone() '
-                        'if record.is_relay_point '
-                        'else record.partner_id.get_mobile_phone()'),
-                },
-            {
-                'dst': 'letter.addressee.address.phoneNumber',
                 'src': ('record.partner_id.parent_id.get_phone() '
                         'if record.is_relay_point '
                         'else record.partner_id.get_phone()'),
+                },
+            {
+                'dst': 'letter.addressee.address.phoneNumber',
+                'src': 'record.partner_id.phone',
                 },
             ],
         },
@@ -608,7 +611,7 @@ class ColissimoRequest():
         for line in package.quant_ids:
             price = 1
             if record.sale_id:
-                price = record.env["sale.order.line"].search([('order_id', '=', record.sale_id.id), ('product_id', '=', line.product_id.id) ], limit=1).price_unit
+                price = record.env["sale.order.line"].search([('order_id', '=', record.sale_id.id), ('product_id', '=', line.product_id.id) ], limit=1).price_unit or line.product_id.lst_price
             product = {
                 "description": line.product_id.name,
                 "quantity": int(line.quantity),

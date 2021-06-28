@@ -12,7 +12,7 @@ import logging
 _logger = logging.getLogger(__name__)
 
 
-EUROPE = ['FR', 'AD', 'MC', 'AT', 'BE', 'BG', 'CH', 'CY', 'CZ', 'DE', 'DK', 'EE', 'ES', 'GR', 'FI', 'HR', 'HU', 'IE', 'IT', 'IS', 'LT', 'LU', 'LV', 'MT', 'NL', 'NO', 'PL', 'PT', 'RO', 'SE', 'SI', 'SK', 'GB']
+EUROPE = ['AT', 'BE', 'BG', 'CH', 'CY', 'CZ', 'DE', 'DK', 'EE', 'ES', 'GR', 'FI', 'HR', 'HU', 'IE', 'IT', 'IS', 'LT', 'LU', 'LV', 'MT', 'NL', 'NO', 'PL', 'PT', 'RO', 'SE', 'SI', 'SK', 'GB']
 FRANCE = ['FR', 'AD', 'MC']
 DOM_TOM = ['GP', 'MQ', 'GF', 'RE', 'YT', 'PM', 'MF', 'BL','NC', 'PF', 'WF', 'TF']
 EUROPE_CN23 = ['CH', 'HR', 'IS', 'NO']

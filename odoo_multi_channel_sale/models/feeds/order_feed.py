@@ -335,6 +335,12 @@ class OrderFeed(models.Model):
 		date_invoice =  date_info.get('date_invoice')
 		confirmation_date = date_info.get('confirmation_date')
 
+		state_current = channel_id.order_state_ids.filtered(lambda state: state.channel_state == self.order_state)
+		if not state_current:
+			message += '<br/>Order status not defined.'
+			state = 'error'
+			_logger.error('#OrderError1 %r' % message)
+
 		if store_partner_id:
 			if not match:
 				res_partner = self.get_order_partner_id(store_partner_id,channel_id)
